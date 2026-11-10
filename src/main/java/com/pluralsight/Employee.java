@@ -1,4 +1,5 @@
 package com.pluralsight;
+import java.time.LocalDateTime;
 
 public class Employee {
     private int employeeId;
@@ -60,11 +61,24 @@ public class Employee {
     public void punchIn(double time){
         startTime = time;
     }
+    public void punchIn(){
+        LocalDateTime current = LocalDateTime.now();
+        double time = current.getHour() + current.getMinute() / 60.0;
+        //Calls other method
+        punchIn(time);
+
+    }
     //USes 2 differnt "times"
     public void punchOut(double time){
         hoursWorked = hoursWorked + (time - startTime);
         startTime = 0;
 
+    }
+    public void punchOut(){
+        LocalDateTime current = LocalDateTime.now();
+        double time = current.getHour() + current.getMinute() / 60.0;
+        //Calls other method
+        punchOut(time);
     }
     public void punchTimeCard(double time) {
         if (startTime == 0) {
@@ -94,53 +108,6 @@ public class Employee {
     public double getTotalPay() {
         return (getRegularHours() * payRate) + (getOvertimeHours() * payRate * 1.5);
     }
-    /*
-    OVERLOADING CONTRUCTORS
-    // eat
-public void eat() {
-    this.energy += 20;
-    System.out.println("I am eating potatoes! And I added 20 energy!");
-}
-
-// eat_int
-public void eat(int energyEaten) {
-    this.energy += energyEaten;
-    System.out.println("I am eating! And I added " + energyEaten + " energy!");
-}
-     */
-    /*
-    // Person_String_String_int
-public Person(String firstName, String lastName, int age) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = age;
-    this.energy = 100;
-}
-
-// Person_String_String
-public Person(String firstName, String lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.energy = 100;
-}
-
-// Person_int
-public Person(int age) {
-    this.age = age;
-}
-
-// Person_String_int
-public Person(String lastName, int age) {
-    this.lastName = lastName;
-    this.age = age;
-}
-
-// Person
-public Person(int age, String firstName) {
-    this.age = age;
-    this.firstName = firstName;
-}
-     */
 
     @Override
     public String toString() {
